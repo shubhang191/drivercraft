@@ -14,8 +14,14 @@ public class systemRepository {
     public void save(vehicle v){
         db.addvehicle(v);
     }
-    public void assign(vehicle v){
-        db.assignvehicle(v);
+    public void assign(String s){
+        db.assignvehicle(s);
+    }
+    public vehicle getvehiclerepo(int i){
+        return db.getvehicle(i);
+    }
+    public vehicle getbookedvehiclerepo(int i){
+        return db.getbookedvehicle(i);
     }
     public int vehiclesizerepo(){
         return db.vehiclesize();
@@ -23,21 +29,11 @@ public class systemRepository {
     public int bookedvehiclesizerepo(){
         return db.bookedvehiclesize();
     }
-    public boolean searchtypevehiclesrepo(vehicle v){
-        for(int i=0; i<db.vehiclesize(); i++){
-            if(v.gettype().equalsIgnoreCase(db.getvehicle(i).gettype())){
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean searchtypebookedvehiclesrepo(vehicle v){
-        for(int i=0; i<db.bookedvehiclesize(); i++){
-            if(v.gettype().equalsIgnoreCase(db.getbookedvehicle(i).gettype())){
-                return true;
-            }
-        }
-        return false;
+    public int getcarbytyperepo(String s){ return db.getcarbytype(s); }
+    public int getbookedcarbytyperepo(String s){ return db.getbookedcarbytype(s); }
+    public int getfareofvehiclerepo(String s, int t){ return db.getfareofvehicle(s, t); }
+    public void remove(String s){
+        db.removevehiclefromfleet(s);
     }
     public void disp(){
         db.displayvehicle();

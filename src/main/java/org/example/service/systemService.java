@@ -10,19 +10,24 @@ public class systemService {
     public systemService(systemRepository r){
         this.r = r;
     }
-    public void assign_av_car(vehicle v, int t){
+
+    public void assign_av_car(String s, int t){
+        vehicle v;
         if(r.vehiclesizerepo() != 0){
-            for(int i=0; i<r.vehiclesizerepo(); i++){
-                if(r.searchtypevehiclesrepo(v)){
-                    r.assign(v);
-                    System.out.println("Vehicle of type " + v.gettype() + " successfully assigned!..");
-                    System.out.println("Base fare: " + v.calculateFare(t));
-                }
+            if(r.getcarbytyperepo(s) != 0){
+                r.assign(s);
+                System.out.println("Vehicle of type " + s + " successfully assigned!..");
+                System.out.println("Base fare: " + r.getfareofvehiclerepo(s, t));
             }
         }
         else{
             System.out.println("No vehicles available!");
         }
+    }
+    public int getcarbytypeservice(String s){ return r.getcarbytyperepo(s); }
+    public int getbookedcarbytypeservice(String s){ return r.getbookedcarbytyperepo(s); }
+    public void removevehicle(String s){
+        r.remove(s);
     }
     public void Addvehicle(vehicle v){
         r.save(v);

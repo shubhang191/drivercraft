@@ -83,26 +83,31 @@ public class systemController {
                             while(true){
                                 System.out.print("Enter the type of car you want to remove: ");
                                 String remove = scanner.nextLine();
-                                Fleetmanager F = Fleetmanager.getInstance();
                                 if(remove.equalsIgnoreCase("Economycar")){
-                                    if(F.economy() <= 0){
+                                    if(ss.getcarbytypeservice("economycar") == 0){
                                         System.out.println("No cars of this type left..");
                                         break;
                                     }
                                 }
                                 else if(remove.equalsIgnoreCase("luxurysedan")){
-                                    if(F.luxury() <= 0){
+                                    if(ss.getcarbytypeservice("luxurysedan") == 0){
                                         System.out.println("No cars of this type left..");
                                         break;
                                     }
                                 }
-                                else{
-                                    if(F.Scooter() <= 0){
+                                else if(remove.equalsIgnoreCase("xuv")){
+                                    if(ss.getcarbytypeservice("xuv") == 0){
                                         System.out.println("No cars of this type left..");
                                         break;
                                     }
                                 }
-                                F.removecarfromfleet(remove);
+                                else if(remove.equalsIgnoreCase("electricscooter")){
+                                    if(ss.getcarbytypeservice("electricscooter") == 0){
+                                        System.out.println("No scooters of this type left..");
+                                        break;
+                                    }
+                                }
+                                ss.removevehicle(remove);
                                 System.out.println("Removal successful...");
                                 System.out.print("Do you want to add more cars?? (y/n): ");
                                 char ym = scanner.next().toUpperCase().charAt(0);
@@ -126,17 +131,17 @@ public class systemController {
                         System.out.print("Do you want to hail a Taxi? (y/n): ");
                         char zm = scanner.next().toUpperCase().charAt(0);
                         if(zm == 'Y'){
-                            System.out.print("What type of Taxi do you want to book?:\n1->Economy car\n2->Luxury Sedan\n3->Electric Scooter\n");
+                            System.out.print("What type of Taxi do you want to book?:\n1->Economy car\n2->Luxury Sedan\n3->Electric Scooter\n4->xuv\n");
                             int t = scanner.nextInt();
                             scanner.nextLine();
-                            System.out.print("Distance: ");
+                            System.out.print("for how long? (time hrs): ");
                             int D = scanner.nextInt();
                             scanner.nextLine();
-                            Fleetmanager f = Fleetmanager.getInstance();
                             switch(t){
-                                case 1->f.alloccars("EconomyCar", D);
-                                case 2->f.alloccars("LuxurySedan", D);
-                                case 3->f.alloccars("ElectricScooter", D);
+                                case 1->ss.assign_av_car("EconomyCar", D);
+                                case 2->ss.assign_av_car("LuxurySedan", D);
+                                case 3->ss.assign_av_car("ElectricScooter", D);
+                                case 4->ss.assign_av_car("xuv", D);
                                 default->System.out.println("Select a valid car type...");
                             }
                             break;
